@@ -1,0 +1,5 @@
+install.packages("readxl")
+library(readxl)
+air_data<-read_excel(file.choose())
+View(air_data)
+plot(air_data$"4",type="h",ylim=c(0,3500))
