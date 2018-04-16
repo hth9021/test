@@ -3,6 +3,7 @@ package kr.ac.chosun.test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -17,7 +18,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StrictMode.enableDefaults();
+
+
+        /*StrictMode.enableDefaults();
 
         TextView status1 = (TextView)findViewById(R.id.result); //파싱된 결과확인!
 
@@ -55,7 +58,7 @@ public class MainActivity extends Activity {
                         }
                         if(parser.getName().equals("t1sum1")){ //address 만나면 내용을 받을수 있게 하자
                             inT1sum1 = true;
-                        }090
+                        }
                         if(parser.getName().equals("t1sum2")){ //mapx 만나면 내용을 받을수 있게 하자
                             inT1sum2 = true;
                         }
@@ -193,7 +196,7 @@ public class MainActivity extends Activity {
             }
         } catch(Exception e){
             status1.setText("에러가..났습니다...");
-        }
+        }*/
     }
 }
 
@@ -203,185 +206,3 @@ public class MainActivity extends Activity {
 
 
 
-
-
-//
-//import android.support.v7.app.AppCompatActivity;
-//
-//import android.app.Activity;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.EditText;
-//import android.widget.TextView;
-//
-//import org.xmlpull.v1.XmlPullParser;
-//import org.xmlpull.v1.XmlPullParserFactory;
-//
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.net.URL;
-//import java.net.URLEncoder;
-//
-//public class MainActivity extends AppCompatActivity {
-//
-//    EditText edit;
-//    TextView text;
-//
-//
-//    String key = "Nb%2BV2BcVQ%2BjSh4zZQkvreUtW0lbjoMq4kmUkR3Inc0OHZXmUTxvqXKaDhBoqvV0HGIx0%2BodRUS8K4Vyg7qiOwg%3D%3D";
-//
-//    String data;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        edit = (EditText) findViewById(R.id.edit);
-//        text = (TextView) findViewById(R.id.text);
-//
-//
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setIcon(R.drawable.appicon);
-//    }
-//
-//    public void mOnClick(View v) {
-//
-//        switch (v.getId()) {
-//            case R.id.button:
-//
-//                new Thread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        data = getXmlData();
-//
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                text.setText(data);
-//                            }
-//                        });
-//                    }
-//                }).start();
-//
-//                break;
-//        }
-//    }
-//
-//    String getXmlData() {
-//        StringBuffer buffer = new StringBuffer();
-//
-//        String str = edit.getText().toString();
-//        String location = URLEncoder.encode(str);
-//
-//        String queryUrl = "http://openapi.airport.kr/openapi/service/PassengerNoticeKR/getfPassengerNoticeIKR?ServiceKey="
-//                + key + "&selectdate=0";
-//
-//        try {
-//            URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
-//            InputStream is = url.openStream(); //url위치로 입력스트림 연결
-//
-//            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//            XmlPullParser xpp = factory.newPullParser();
-//            xpp.setInput(new InputStreamReader(is, "UTF-8")); //inputstream 으로부터 xml 입력받기
-//
-//            String tag;
-//
-//            xpp.next();
-//            int eventType = xpp.getEventType();
-//
-//            while (eventType != XmlPullParser.END_DOCUMENT) {
-//                switch (eventType) {
-//                    case XmlPullParser.START_DOCUMENT:
-//                        buffer.append("파싱 시작...\n\n");
-//                        break;
-//
-//                    case XmlPullParser.START_TAG:
-//                        tag = xpp.getName();//태그 이름 얻어오기
-//
-//                        if (tag.equals("item")) ;
-//                        else if (tag.equals("atime")) {
-//                            buffer.append("시간 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum1")) {
-//                            buffer.append("T1입국장 동편(A,B) 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum2")) {
-//                            buffer.append("T1입국장 서편(E,F) 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum3")) {
-//                            buffer.append("T1입국심사(C) 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum4")) {
-//                            buffer.append("T1입국심사(D) 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum5")) {
-//                            buffer.append("T1출국장1,2 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum6")) {
-//                            buffer.append("T1출국장3 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum7")) {
-//                            buffer.append("T1출국장4 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sum8")) {
-//                            buffer.append("T1출국장5,6 현황 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sumset1")) {
-//                            buffer.append("T1입국장 합계 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        } else if (tag.equals("t1sumset2")) {
-//                            buffer.append("T1출국장 합계 : ");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            buffer.append("\n");
-//                        }
-//                        break;
-//
-//
-//                    case XmlPullParser.TEXT:
-//
-//                        break;
-//
-//                    case XmlPullParser.END_TAG:
-//
-//                        tag = xpp.getName();
-//
-//                        if (tag.equals("item")) buffer.append("\n");
-//
-//                        break;
-//
-//                }
-//                eventType = xpp.next();
-//
-//            }
-//        } catch (Exception e) {
-//
-//        }
-//        buffer.append("파싱 끝\n");
-//
-//        return buffer.toString();
-//
-//    }
-//}
